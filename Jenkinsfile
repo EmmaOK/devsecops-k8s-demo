@@ -19,7 +19,8 @@ pipeline {
              jacoco excePattern: 'target/jacoco.exec'                } 
            }
        }           
-      }     
+      }    
+       
     stage('Docker Build and Push') {
         steps {
             sh 'printenv'
