@@ -21,23 +21,12 @@ pipeline {
         }
        }  
 
-    stage('Mutation Tests - PIT') {
-        steps {
-           sh "mvn org.pitest:pitest-maven:mutationCoverage"
-        }
-        post {
-          always {
-            pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
-          }
-        }
-     }
-
     stage('Docker Build and Push') {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
               sh 'printenv'
-              sh 'docker build -t mega2/numeric-app:""$GIT_COMMIT"".'
-              sh 'docker push mega2/numeric-app:""$GIT_COMMIT""'
+              sh 'docker build -t docker-registry:5000/java-app:latest .'
+              sh 'docker push docker-registry:5000/java-app:latest'
              }
           }
     }
