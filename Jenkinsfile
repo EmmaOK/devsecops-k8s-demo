@@ -25,8 +25,8 @@ pipeline {
         steps {
           withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
               sh 'printenv'
-              sh 'docker build -t docker-registry:5000/java-app:latest .'
-              sh 'docker push docker-registry:5000/java-app:latest'
+               sh 'sudo docker build -t mega2/numeric-app:""$GIT_COMMIT"" .'
+               sh 'docker push mega2/numeric-app:""$GIT_COMMIT""'
              }
           }
     }
